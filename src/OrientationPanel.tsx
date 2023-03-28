@@ -135,7 +135,7 @@ function OrientationPanel({ context }: { context: PanelExtensionContext }): JSX.
 
   useEffect(() => {
     // Get orientation from quaternion then set rotation on arrow
-    console.log("message", message)
+    // console.log("message", message)
     if (message) {
       let quaternion = {} as Quaternion;
       if (message.schemaName === "sensor_msgs/msg/Imu") {
@@ -145,13 +145,13 @@ function OrientationPanel({ context }: { context: PanelExtensionContext }): JSX.
       } else if (message.schemaName === "geometry_msgs/msg/Quaternion") {
         quaternion = message.message as Quaternion;
       }
-      console.log("quaternion", quaternion);
+      // console.log("quaternion", quaternion);
       const quat = new Quat( quaternion.w, quaternion.x, quaternion.y, quaternion.z,);
       const euler = quat.toEuler();
-      console.log("euler", euler);
+      // console.log("euler", euler);
       const rotationdeg = -1 * euler.yaw * (180 / Math.PI);
       // const rotationdeg = euler.roll * (180 / Math.PI);
-      console.log("rotationdeg", rotationdeg)
+      // console.log("rotationdeg", rotationdeg)
       arrowRef.current!.style.transform = `rotate(${rotationdeg}deg)`;
     }
   }, [message]);
